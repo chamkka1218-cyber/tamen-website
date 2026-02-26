@@ -307,6 +307,40 @@ header {
   flex-wrap: wrap
 }
 
+/* ===== 상세 페이지 타이틀 바 (히어로 이미지 없음) ===== */
+.page-title-bar {
+  margin-top: var(--headerH);
+  padding: 52px 0 44px;
+  background: #fff;
+  border-bottom: 1px solid var(--line);
+}
+
+.page-title-bar h1 {
+  margin: 0 0 10px;
+  font-size: 36px;
+  letter-spacing: -.5px;
+  line-height: 1.2;
+  color: var(--dark);
+}
+
+.page-title-bar p {
+  margin: 0;
+  font-size: 16px;
+  color: var(--muted);
+}
+
+.page-title-bar .ctaRow {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 860px) {
+  .page-title-bar h1 {
+    font-size: 26px;
+  }
+}
+
 .hero .pillRow {
   margin-top: 18px;
   display: flex;
