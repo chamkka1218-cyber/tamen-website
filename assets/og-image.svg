@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630">
+<rect width="100%" height="100%" fill="#0b1020"/>
+<rect x="70" y="70" width="1060" height="490" rx="28" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.12)"/>
+<text x="120" y="220" font-family="Arial, sans-serif" font-size="54" fill="#ffffff">(주)태멘</text>
+<text x="120" y="300" font-family="Arial, sans-serif" font-size="30" fill="rgba(255,255,255,0.78)">지하이중벽 · 배수판 전문기업</text>
+<text x="120" y="390" font-family="Arial, sans-serif" font-size="24" fill="rgba(255,255,255,0.62)">지하주차장 · 피난동선 | 배수 · 환기 · 내구 솔루션</text>
+</svg>

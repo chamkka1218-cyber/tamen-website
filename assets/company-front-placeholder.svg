@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700">
+  <defs>
+    <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#0f172a"/>
+      <stop offset="1" stop-color="#1f2937"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="700" fill="url(#g)"/>
+  <rect x="30" y="30" width="1140" height="640" fill="none" stroke="#38bdf8" stroke-width="4" opacity="0.8"/>
+  <text x="50%" y="45%" fill="#ffffff" font-family="Noto Sans KR, Arial" font-size="46" font-weight="700" text-anchor="middle">회사 전경 이미지</text>
+  <text x="50%" y="55%" fill="#cbd5e1" font-family="Noto Sans KR, Arial" font-size="28" text-anchor="middle">추후 실물 이미지로 교체 예정</text>
+</svg>
