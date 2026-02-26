@@ -307,26 +307,46 @@ header {
   flex-wrap: wrap
 }
 
-/* ===== 상세 페이지 타이틀 바 (히어로 이미지 없음) ===== */
+/* ===== 상세 페이지 타이틀 바 (히어로 이미지 없음, 동일 크기) ===== */
 .page-title-bar {
   margin-top: var(--headerH);
-  padding: 52px 0 44px;
-  background: #fff;
-  border-bottom: 1px solid var(--line);
+  min-height: 560px;
+  height: 72vh;
+  display: flex;
+  align-items: center;
+  background: linear-gradient(135deg, #1a1f2e 0%, #2c374a 50%, #1e2838 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.page-title-bar::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(75, 119, 139, 0.18) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 20%, rgba(205, 123, 21, 0.10) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.page-title-bar .container {
+  position: relative;
+  z-index: 1;
 }
 
 .page-title-bar h1 {
-  margin: 0 0 10px;
-  font-size: 36px;
-  letter-spacing: -.5px;
-  line-height: 1.2;
-  color: var(--dark);
+  margin: 0 0 14px;
+  font-size: 44px;
+  letter-spacing: -.6px;
+  line-height: 1.15;
+  color: #fff;
 }
 
 .page-title-bar p {
-  margin: 0;
-  font-size: 16px;
-  color: var(--muted);
+  margin: 0 0 26px;
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.78);
+  max-width: 60ch;
 }
 
 .page-title-bar .ctaRow {
@@ -335,9 +355,27 @@ header {
   flex-wrap: wrap;
 }
 
+.page-title-bar .btn.secondary {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+.page-title-bar .btn.secondary:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
 @media (max-width: 860px) {
+  .page-title-bar {
+    min-height: 500px;
+  }
+
   .page-title-bar h1 {
-    font-size: 26px;
+    font-size: 30px;
+  }
+
+  .page-title-bar p {
+    font-size: 15px;
   }
 }
 
@@ -849,8 +887,8 @@ footer a {
   font-size: 14px;
   padding: 8px 12px;
   border-radius: 999px;
-  border: 1px solid rgba(0,0,0,.08);
-  background: rgba(0,0,0,.03);
+  border: 1px solid rgba(0, 0, 0, .08);
+  background: rgba(0, 0, 0, .03);
   white-space: nowrap;
 }
 
@@ -882,7 +920,7 @@ footer a {
   aspect-ratio: 16 / 10;
   border-radius: 14px;
   overflow: hidden;
-  border: 1px solid rgba(0,0,0,.08);
+  border: 1px solid rgba(0, 0, 0, .08);
   background: #fff;
 }
 
@@ -912,7 +950,7 @@ footer a {
 }
 
 .product-card .spec {
-  border-top: 1px dashed rgba(0,0,0,.14);
+  border-top: 1px dashed rgba(0, 0, 0, .14);
   padding-top: 10px;
   display: flex;
   justify-content: space-between;
@@ -946,8 +984,8 @@ footer a {
   font-size: 12px;
   padding: 6px 10px;
   border-radius: 999px;
-  border: 1px solid rgba(0,0,0,.08);
-  background: rgba(0,0,0,.03);
+  border: 1px solid rgba(0, 0, 0, .08);
+  background: rgba(0, 0, 0, .03);
 }
 
 .detailGrid {
@@ -979,6 +1017,7 @@ footer a {
   .product-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
   .detailGrid {
     grid-template-columns: 1fr;
   }
@@ -988,6 +1027,7 @@ footer a {
   .product-grid {
     grid-template-columns: 1fr;
   }
+
   section {
     padding: 72px 0;
   }
