@@ -188,7 +188,7 @@ ${message}`
     current.images = set.images;
     current.idx = 0;
     titleEl.textContent = set.title;
-    descEl.textContent = set.desc;
+    if (descEl) descEl.textContent = set.desc;
     renderDots();
     go(0);
 
