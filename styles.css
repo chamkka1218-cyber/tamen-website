@@ -1033,3 +1033,64 @@ footer a {
     padding: 72px 0;
   }
 }
+
+/* ===== Refined Contact Section ===== */
+.consult-refined {
+  padding: 80px 0;
+}
+
+.consult-grid {
+  margin-top: 40px;
+  background: #f7f7f5;
+  border-radius: 16px;
+  padding: 60px 40px;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.04);
+}
+
+.consult-item {
+  text-align: center;
+}
+
+.consult-label {
+  font-size: 12px;
+  letter-spacing: 2px;
+  color: #8b877f;
+  margin-bottom: 10px;
+}
+
+.consult-item h3 {
+  margin: 0 0 14px;
+  font-weight: 600;
+}
+
+.consult-value {
+  font-size: 20px;
+  font-weight: 700;
+  text-decoration: none;
+  color: #2e2e2c;
+  transition: all .2s ease;
+}
+
+.consult-value:hover {
+  opacity: .7;
+}
+
+.consult-divider {
+  width: 1px;
+  height: 80px;
+  background: rgba(0,0,0,0.08);
+}
+
+@media (max-width: 768px) {
+  .consult-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .consult-divider {
+    display: none;
+  }
+}
