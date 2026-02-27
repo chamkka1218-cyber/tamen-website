@@ -114,6 +114,128 @@ ${message}`
 })();
 
 
+// ===== CASE MODAL SLIDER (시공 사례) =====
+(function () {
+  const modal = document.getElementById('caseModal');
+  const closeBtn = document.getElementById('caseModalClose');
+  const titleEl = document.getElementById('caseModalTitle');
+  const imgEl = document.getElementById('caseSlideImg');
+  const captionEl = document.getElementById('caseCaption');
+  const prevBtn = document.getElementById('casePrev');
+  const nextBtn = document.getElementById('caseNext');
+  const dotsEl = document.getElementById('caseDots');
+
+  const cards = document.querySelectorAll('.caseCard');
+  if (!modal || !closeBtn || !titleEl || !imgEl || !prevBtn || !nextBtn || !dotsEl || !cards.length) return;
+
+  let current = 0;
+  let gallery = [];
+  let activeTitle = '시공 사례';
+
+  function renderDots() {
+    dotsEl.innerHTML = '';
+    if (gallery.length <= 1) return;
+    gallery.forEach((_, i) => {
+      const d = document.createElement('button');
+      d.type = 'button';
+      d.className = 'dot' + (i === current ? ' active' : '');
+      d.setAttribute('aria-label', `슬라이드 ${i + 1}`);
+      d.addEventListener('click', () => {
+        current = i;
+        render();
+      });
+      dotsEl.appendChild(d);
+    });
+  }
+
+  function render() {
+    const item = gallery[current];
+    if (!item) return;
+
+    titleEl.textContent = activeTitle;
+    imgEl.src = item.src;
+    imgEl.alt = activeTitle + ` (${current + 1}/${gallery.length})`;
+
+    const cap = (item.caption || '').trim();
+    if (captionEl) {
+      captionEl.textContent = cap;
+      captionEl.style.display = cap ? 'block' : 'none';
+    }
+
+    prevBtn.style.display = gallery.length > 1 ? 'flex' : 'none';
+    nextBtn.style.display = gallery.length > 1 ? 'flex' : 'none';
+    renderDots();
+  }
+
+  function openModal(title, items) {
+    activeTitle = title || '시공 사례';
+    gallery = Array.isArray(items) ? items : [];
+    current = 0;
+    if (!gallery.length) return;
+
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden', 'false');
+    render();
+  }
+
+  function closeModal() {
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden', 'true');
+    imgEl.src = '';
+    if (captionEl) captionEl.textContent = '';
+    gallery = [];
+    current = 0;
+  }
+
+  function prev() {
+    if (gallery.length <= 1) return;
+    current = (current - 1 + gallery.length) % gallery.length;
+    render();
+  }
+
+  function next() {
+    if (gallery.length <= 1) return;
+    current = (current + 1) % gallery.length;
+    render();
+  }
+
+  cards.forEach(card => {
+    card.addEventListener('click', () => {
+      const title = card.getAttribute('data-title') || card.querySelector('b')?.textContent || '시공 사례';
+      const raw = card.getAttribute('data-gallery') || '[]';
+      let items = [];
+      try {
+        items = JSON.parse(raw);
+      } catch (e) {
+        items = [];
+      }
+      // normalize
+      items = items.map(it => ({
+        src: it.src || it,
+        caption: it.caption || ''
+      })).filter(it => !!it.src);
+
+      openModal(title, items);
+    });
+  });
+
+  prevBtn.addEventListener('click', (e) => { e.stopPropagation(); prev(); });
+  nextBtn.addEventListener('click', (e) => { e.stopPropagation(); next(); });
+  closeBtn.addEventListener('click', closeModal);
+
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) closeModal();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (!modal.classList.contains('open')) return;
+    if (e.key === 'Escape') closeModal();
+    if (e.key === 'ArrowLeft') prev();
+    if (e.key === 'ArrowRight') next();
+  });
+})();
+
+
 
 // ===== SPEC MODAL SLIDER (규격/도면 자료) =====
 (function () {
@@ -155,6 +277,23 @@ ${message}`
         'assets/spec-detail-2.png',
         'assets/spec-detail-3.png'
       ]
+    },
+
+    // ===== Waterproof page extra sets =====
+    outerSpec: {
+      title: 'TM 외벽 방수 보호판 · 제품 규격',
+      desc: '클릭하여 이미지를 확대해서 확인할 수 있습니다.',
+      images: ['assets/outer_spec.jpg']
+    },
+    outerDetail: {
+      title: 'TM 외벽 방수 보호판 · 상세도',
+      desc: '클릭하여 이미지를 확대해서 확인할 수 있습니다.',
+      images: ['assets/outer_detail.jpg']
+    },
+    absSpec: {
+      title: 'TM 방수 보호판 (ABS) · 정면/배면',
+      desc: '클릭하여 정면/배면도를 슬라이드로 확인할 수 있습니다.',
+      images: ['assets/abs_front.jpg', 'assets/abs_back.jpg']
     }
   };
 
@@ -208,6 +347,15 @@ ${message}`
     card.addEventListener('click', () => {
       const key = card.getAttribute('data-spec-set');
       open(key);
+    });
+
+    // Keyboard accessibility (Enter/Space)
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        const key = card.getAttribute('data-spec-set');
+        open(key);
+      }
     });
   });
 
